@@ -59,6 +59,10 @@ global_variables() {
 
     # Change this to your disqus username to use disqus for comments
     global_disqus_username=""
+    
+    #comentario domain name if you want to use it for coments
+    global_comentario_domain=""
+
 
 
     # Blog generated files
@@ -235,6 +239,15 @@ disqus_body() {
             </script>
             <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
             <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>'
+}
+
+#Prints the required code for comentario comments
+comentario_body() {
+    echo '<div class="content">
+   <script defer src="https://'$global_comentario_domain'/comentario.js"></script>
+   <comentario-comments theme="light"></comentario-comments>
+</div>
+'
 }
 
 # Prints the required code for disqus in the footer
@@ -494,6 +507,9 @@ create_html_page() {
 
         # Add disqus commments except for index and all_posts pages
         [[ $index == no ]] && disqus_body
+        
+        #Add comentario comments except for index and all_posts pages
+        [[ $index == no ]] && comentario_body
 
         # page footer
         cat .footer.html
