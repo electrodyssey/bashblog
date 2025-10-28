@@ -243,6 +243,8 @@ disqus_body() {
 
 #Prints the required code for comentario comments
 comentario_body() {
+    [[ -z $global_comentario_domain ]] && return
+        
     echo '<div class="content">
    <script defer src="https://'$global_comentario_domain'/comentario.js"></script>
    <comentario-comments theme="light"></comentario-comments>
